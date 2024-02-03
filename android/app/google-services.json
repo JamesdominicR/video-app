@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "293557371979",
+    "project_id": "machine-test-video-app",
+    "storage_bucket": "machine-test-video-app.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:293557371979:android:f15f2d1ec7c158f2bab9ce",
+        "android_client_info": {
+          "package_name": "com.example.machine_test_video_app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDH7sWXk4UWa6KWCqcq4AbBVrQDtCL6uz8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
