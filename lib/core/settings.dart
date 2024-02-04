@@ -1,4 +1,4 @@
 class Settings {
- static const appId = "3d65c79271184eaaa3afd3956dbaca5e";
- static const token = "007eJxTYLgwibtq/wZpy1aJuoBLVa3vXlw/yBCUnz9dNvTyncfbFwkqMBinmJkmm1samRsaWpikJiYmGiempRhbmpqlJCUmJ5qmTgrYl9oQyMjAxj6TkZEBAkF8boaS1OKS5IzEvLzUHAYGAIJTIxA=";
+ static const appId = "f1e0bcd66b544800aa43d3e05e87a618";
+ static const token = "007eJxTYNBKUu+J9p03P4zrcnvdv9s7us39VjI94tK4Eb7qWcA2j34FhjTDVIOk5BQzsyRTExMLA4PERBPjFONUA9NUC/NEM0OL9377UxsCGRk8K54xMjJAIIjPzVCSWlzinJGYl5eaw8AAACwSIoQ=";
 }

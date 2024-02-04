@@ -23,7 +23,6 @@ class MyApp extends StatelessWidget {
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         theme: ThemeData(
-          textTheme: TextTheme(),
          primarySwatch: Colors.green,
           useMaterial3: true,
         ),

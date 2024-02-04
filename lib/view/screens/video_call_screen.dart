@@ -13,19 +13,20 @@ class VideoCallScreen extends StatelessWidget {
       onPopInvoked: (value) {},
       child: Scaffold(
         body: SafeArea(
-          child:Consumer<VideoCallProvider>(
-            builder: (context,videoCallProvider,_) {
+          child: Consumer<VideoCallProvider>(
+            builder: (context, videoCallProvider, _) {
               videoCallProvider.initializeAgora();
-            return Center(
-              child: Stack(
-                children: [
-                  AgoraVideoViewer(client: videoCallProvider.client,
-                  showNumberOfUsers: true,
-                  ),
-                  AgoraVideoButtons(client: videoCallProvider.client),
-                ],
-              ),
-            );
+              return Center(
+                child: Stack(
+                  children: [
+                    AgoraVideoViewer(
+                      client: videoCallProvider.client,
+                      showNumberOfUsers: true,
+                    ),
+                    AgoraVideoButtons(client: videoCallProvider.client),
+                  ],
+                ),
+              );
             },
           ),
         ),

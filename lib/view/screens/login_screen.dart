@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:machine_test_video_app/core/string_constants.dart';
 import 'package:machine_test_video_app/provider/login_provider.dart';
 import 'package:machine_test_video_app/view/screens/home_screen.dart';
 import 'package:machine_test_video_app/view/widgets/common_button.dart';
@@ -24,25 +25,26 @@ class LoginScreen extends StatelessWidget {
                 key: loginProvider.formKey,
                 child: Column(
                   children: <Widget>[
-                    const Text("Login",
+                    const Text(StringConstants.LOGIN,
                     style: TextStyle(fontWeight: FontWeight.bold,fontSize: 30),
                     ),
                     SizedBox(height: screenHeight * 0.08),
                      CommonInputBox(
-                      title: "Email",
+                      title: StringConstants.EMAIL,
                       controller: loginProvider.emailController,
                       prefixIcon: const Icon(Icons.email,
                       size: 20,
                       ),
                       validator: (value) {
                         if(value.toString().isEmpty) {
-                          return "Plese enter email";
+                          return StringConstants.PLEASE_ENTER_EMAIL;
                         }
+                        return null;
                       },
                       ),
                       const SizedBox(height: 20),
                         CommonInputBox(
-                      title: "Password",
+                      title: StringConstants.PASSWORD,
                       controller: loginProvider.passwordController,
                       prefixIcon: const Icon(Icons.lock,
                       size: 20,
@@ -60,8 +62,9 @@ class LoginScreen extends StatelessWidget {
                       ),
                       validator: (value) {
                        if(value.toString().isEmpty) {
-                          return "Plese enter password";
+                          return StringConstants.PLEASE_ENTER_PASSWORD;
                         }
+                        return null;
                       }
                       ),
                       SizedBox(height: screenHeight * 0.05),
@@ -69,21 +72,19 @@ class LoginScreen extends StatelessWidget {
                       title: "Login",
                       backgroundColor: Colors.green,
                       onPressed: () {
-                         loginProvider.login().then((value) => value == true
+                        if(loginProvider.formKey.currentState?.validate() == true) {
+                           loginProvider.login().then((value) => value == true
                         ? Navigator.push(context, MaterialPageRoute(builder: (context) => const HomeScreen()))
                         : const IgnorePointer(),
                         );
-                        // if(loginProvider.formKey.currentState?.validate() == true) {
-                       
-                        // }
-                       //Navigator.push(context, MaterialPageRoute(builder: (context) => const HomeScreen()));
+                        }
+                       Navigator.push(context, MaterialPageRoute(builder: (context) => const HomeScreen()));
                       },
                       ),
                   ],
                 ),
               ),
             );
-            //FirebaeAuth.instace.signoout(); go to navigation;
             }
           ),
         ),
