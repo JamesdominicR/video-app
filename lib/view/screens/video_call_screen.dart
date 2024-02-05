@@ -4,7 +4,8 @@ import 'package:machine_test_video_app/provider/video_call_provider.dart';
 import 'package:provider/provider.dart';
 
 class VideoCallScreen extends StatelessWidget {
-  const VideoCallScreen({super.key});
+  final String userName;
+  const VideoCallScreen({super.key,required this.userName});
 
   @override
   Widget build(BuildContext context) {
@@ -15,15 +16,19 @@ class VideoCallScreen extends StatelessWidget {
         body: SafeArea(
           child: Consumer<VideoCallProvider>(
             builder: (context, videoCallProvider, _) {
+              videoCallProvider.userName = userName;
               videoCallProvider.initializeAgora();
               return Center(
                 child: Stack(
                   children: [
                     AgoraVideoViewer(
                       client: videoCallProvider.client,
+                      enableHostControls: true,
                       showNumberOfUsers: true,
                     ),
-                    AgoraVideoButtons(client: videoCallProvider.client),
+                    AgoraVideoButtons(client: videoCallProvider.client,
+                      addScreenSharing: false,
+                    ),
                   ],
                 ),
               );

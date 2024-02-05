@@ -1,5 +1,6 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:machine_test_video_app/provider/register_provider.dart';
 import 'package:machine_test_video_app/provider/video_call_provider.dart';
 import 'package:machine_test_video_app/provider/login_provider.dart';
 import 'package:machine_test_video_app/view/screens/login_screen.dart';
@@ -22,6 +23,7 @@ class MyApp extends StatelessWidget {
       providers: [
         ChangeNotifierProvider<LoginProvider>(create: (context) => LoginProvider()),
         ChangeNotifierProvider(create: (context) => VideoCallProvider()),
+        ChangeNotifierProvider(create: (context) => RegisterProvider()),
         ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,

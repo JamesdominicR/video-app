@@ -5,8 +5,11 @@ import 'package:machine_test_video_app/view/screens/video_call_screen.dart';
 import 'package:machine_test_video_app/view/widgets/icon_button_widget.dart';
 import 'package:provider/provider.dart';
 
+import 'login_screen.dart';
+
 class HomeScreen extends StatelessWidget {
-  const HomeScreen({super.key});
+  final String userName;
+  const HomeScreen({super.key,required this.userName});
 
   @override
   Widget build(BuildContext context) {
@@ -36,7 +39,7 @@ class HomeScreen extends StatelessWidget {
                     Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => const VideoCallScreen()));
+                            builder: (context) => VideoCallScreen(userName: userName)));
                   },
                   title: StringConstants.START_VIDEO_CALL,
                   fixedSize: Size(screenWidth, 10),
@@ -48,7 +51,8 @@ class HomeScreen extends StatelessWidget {
                 const SizedBox(height: 20),
                 IconButtonWidget(
                     onPressed: () {
-                      loginProvider.signOut(context);
+                      loginProvider.signOut().then((value) =>  Navigator.pushReplacement(
+                          context, MaterialPageRoute(builder: (context) => const LoginScreen())));
                     },
                     title: StringConstants.SIGN_OUT,
                     fixedSize: Size(screenWidth, 10),

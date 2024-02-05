@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:machine_test_video_app/core/settings.dart';
@@ -12,37 +14,41 @@ FirebaseAuth auth = FirebaseAuth.instance;
 bool isLoading = false;
 bool isHidden = true;
 
-Future<bool> login(BuildContext context) async {
+Future<bool> login() async {
   isLoading = true;
+  notifyListeners();
   UserCredential? user = await auth.signInWithEmailAndPassword(email: emailController.text, password: passwordController.text);
   try {
     isLoading = false;
-    if(context.mounted) {
-    Navigator.push(context, MaterialPageRoute(builder: (context) => const HomeScreen()));
-    }
-      if(user.credential != null) {
     notifyListeners();
+    if(user.user?.email?.isNotEmpty == true) {
+    notifyListeners();
+    textFieldClear();
     return Future.value(true);
-  } else {
+  }
+  }
+  on FirebaseAuthException catch(e) {
     isLoading = false;
+    notifyListeners();
+    log(e.toString());
     return Future.value(false);
   }
-  }
-  catch(e) {
-    isLoading = false;
-    return Future.value(false);
-  }
+  return Future.value(false);
 }
 
-void signOut(BuildContext context) {
-  auth.signOut();
-  Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) => const LoginScreen()), (route) => false);
+Future signOut() async{
+  await auth.signOut();
   notifyListeners();
 }
 
 void togglePasswordView() {
   isHidden = !isHidden;
   notifyListeners();
+}
+
+void textFieldClear() {
+  emailController.clear();
+  passwordController.clear();
 }
 
 }

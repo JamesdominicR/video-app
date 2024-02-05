@@ -1,7 +1,10 @@
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:machine_test_video_app/core/string_constants.dart';
 import 'package:machine_test_video_app/provider/login_provider.dart';
 import 'package:machine_test_video_app/view/screens/home_screen.dart';
+import 'package:machine_test_video_app/view/screens/register_screen.dart';
 import 'package:machine_test_video_app/view/widgets/common_button.dart';
 import 'package:machine_test_video_app/view/widgets/common_input_box.dart';
 import 'package:provider/provider.dart';
@@ -15,13 +18,15 @@ class LoginScreen extends StatelessWidget {
     return Scaffold(
       body: SafeArea(
         child: SingleChildScrollView(
-          child: Consumer<LoginProvider>(
-            builder: (context,loginProvider,_) {
-            return loginProvider.isLoading == true
-            ? const Center(child: CircularProgressIndicator())
-            : Padding(
-              padding: EdgeInsets.only(left: 15,right: 15,top: screenHeight * 0.10),
-              child: Form(
+          child: Padding(
+            padding: EdgeInsets.only(left: 15,right: 15,top: screenHeight * 0.10),
+            child: Consumer<LoginProvider>(
+              builder: (context,loginProvider,_) {
+              return loginProvider.isLoading == true
+              ? const Align(
+                alignment: Alignment.center,
+                  child: CircularProgressIndicator(color: Colors.green))
+              : Form(
                 key: loginProvider.formKey,
                 child: Column(
                   children: <Widget>[
@@ -69,22 +74,44 @@ class LoginScreen extends StatelessWidget {
                       ),
                       SizedBox(height: screenHeight * 0.05),
                     CommonButton(
-                      title: "Login",
+                      title: StringConstants.LOGIN,
                       backgroundColor: Colors.green,
                       onPressed: () {
                         if(loginProvider.formKey.currentState?.validate() == true) {
-                           loginProvider.login(context).then((value) => value == true
-                        ? Navigator.push(context, MaterialPageRoute(builder: (context) => const HomeScreen()))
-                        : const IgnorePointer(),
+                           loginProvider.login().then((value) => value == true
+                        ? Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => HomeScreen(userName: loginProvider.emailController.text)))
+                        : Fluttertoast.showToast(msg: StringConstants.LOGIN_FAILED),
                         );
                         }
                       },
                       ),
+                    SizedBox(height: screenHeight * 0.04),
+                     RichText(
+                      text: TextSpan(
+                          text: StringConstants.DONT_HAVE_ACCOUNT,
+                          style: const TextStyle(
+                            color: Colors.grey,
+                            fontWeight: FontWeight.w600,
+                            fontSize: 12,
+                          ),
+                          children: [
+                            TextSpan(
+                                text: StringConstants.SIGN_UP,
+                                style: const TextStyle(
+                                    fontSize: 14,
+                                    fontWeight: FontWeight.w600,
+                                    decoration: TextDecoration.underline),
+                                recognizer: TapGestureRecognizer()
+                                  ..onTap = () {
+                                    Navigator.push(context, MaterialPageRoute(builder: (context) => const RegisterScreen()));
+                                  }),
+                          ]),
+                    ),
                   ],
                 ),
-              ),
-            );
-            }
+              );
+              }
+            ),
           ),
         ),
       ),
