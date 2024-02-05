@@ -10,6 +10,9 @@ Future<void> main() async {
   await Firebase.initializeApp();
   runApp(const MyApp());
 }
+//Todo: credential for testing
+//Email: james@gmail.com
+//password: testing@123
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});

@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:machine_test_video_app/core/settings.dart';
 import 'package:machine_test_video_app/view/screens/home_screen.dart';
 import 'package:machine_test_video_app/view/screens/login_screen.dart';
 
