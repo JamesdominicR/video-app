@@ -23,6 +23,10 @@ class VideoCallScreen extends StatelessWidget {
                   children: [
                     AgoraVideoViewer(
                       client: videoCallProvider.client,
+                      layoutType: Layout.floating,
+                      floatingLayoutContainerHeight: 100,
+                      floatingLayoutContainerWidth: 100,
+                      showAVState: true,
                       enableHostControls: true,
                       showNumberOfUsers: true,
                     ),
