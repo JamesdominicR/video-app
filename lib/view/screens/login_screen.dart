@@ -73,12 +73,11 @@ class LoginScreen extends StatelessWidget {
                       backgroundColor: Colors.green,
                       onPressed: () {
                         if(loginProvider.formKey.currentState?.validate() == true) {
-                           loginProvider.login().then((value) => value == true
+                           loginProvider.login(context).then((value) => value == true
                         ? Navigator.push(context, MaterialPageRoute(builder: (context) => const HomeScreen()))
                         : const IgnorePointer(),
                         );
                         }
-                       Navigator.push(context, MaterialPageRoute(builder: (context) => const HomeScreen()));
                       },
                       ),
                   ],

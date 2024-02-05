@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:machine_test_video_app/view/screens/home_screen.dart';
 import 'package:machine_test_video_app/view/screens/login_screen.dart';
 
 class LoginProvider extends ChangeNotifier {
@@ -10,11 +11,14 @@ FirebaseAuth auth = FirebaseAuth.instance;
 bool isLoading = false;
 bool isHidden = true;
 
-Future<bool> login() async {
+Future<bool> login(BuildContext context) async {
   isLoading = true;
   UserCredential? user = await auth.signInWithEmailAndPassword(email: emailController.text, password: passwordController.text);
   try {
     isLoading = false;
+    if(context.mounted) {
+    Navigator.push(context, MaterialPageRoute(builder: (context) => const HomeScreen()));
+    }
       if(user.credential != null) {
     notifyListeners();
     return Future.value(true);
