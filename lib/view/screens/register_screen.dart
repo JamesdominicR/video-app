@@ -109,7 +109,7 @@ class RegisterScreen extends StatelessWidget {
                                     ? Navigator.pushReplacement(context,
                                     MaterialPageRoute(builder: (
                                         context) => const LoginScreen()))
-                                    : Fluttertoast.showToast(msg: StringConstants.REGISTRATION_FAILED),
+                                    : Fluttertoast.showToast(msg: StringConstants.REGISTRATION_FAILED).then((value) => Navigator.pop(context)),
                                 );
                               }
                             }

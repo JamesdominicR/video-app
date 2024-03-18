@@ -78,10 +78,7 @@ class LoginScreen extends StatelessWidget {
                       backgroundColor: Colors.green,
                       onPressed: () {
                         if(loginProvider.formKey.currentState?.validate() == true) {
-                           loginProvider.login().then((value) => value == true
-                        ? Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => HomeScreen(userName: loginProvider.emailController.text)))
-                        : Fluttertoast.showToast(msg: StringConstants.LOGIN_FAILED),
-                        );
+                           loginProvider.login(context);
                         }
                       },
                       ),
